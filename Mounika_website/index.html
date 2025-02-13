@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mounika Cheera | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <!-- GSAP Library for advanced animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Modal for Project Details -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-body">
+        <!-- Project details will be inserted dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Header with Dark Mode Toggle -->
+  <header class="reveal">
+    <div class="container header-container">
+      <div class="logo">
+        <h1>Mounika Cheera</h1>
+        <p>Software Engineer</p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#portfolio">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#endorsements">Endorsements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-controls">
+        <button id="mode-toggle" class="mode-toggle">Toggle Mode</button>
+        <div class="mobile-menu">
+          <button id="menu-toggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Two-Column Layout -->
+  <section id="hero" class="hero reveal">
+    <div class="parallax-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2>Welcome, I'm Mounika Cheera</h2>
+        <p>Innovative Software Engineer delivering scalable solutions and insightful research.</p>
+        <a href="#portfolio" class="btn">View My Work</a>
+      </div>
+      <div class="hero-image">
+        <!-- Replace with your actual profile image -->
+        <img src="images/profile.jpg" alt="Mounika Cheera" />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about reveal glass-panel">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I am a passionate Software Engineer with a blend of research and industry experience. 
+        Currently, as a Graduate Research Assistant at UMBC, I streamline processes and develop innovative platforms. 
+        My previous roles at Cognizant and 27 Architects have honed my skills in full-stack development, data integration, and automation.
+      </p>
+      <div class="timeline">
+        <div class="timeline-item card-3d">
+          <h3>Graduate Research Assistant, UMBC</h3>
+          <span>Aug 2022 – May 2024</span>
+          <p>Designed a scalable web portal for assignment submissions, grading, and reporting.</p>
+        </div>
+        <div class="timeline-item card-3d">
+          <h3>Programmer Analyst Trainee, Cognizant</h3>
+          <span>Aug 2021 – Aug 2022</span>
+          <p>Developed an automated reconciliation system for financial data.</p>
+        </div>
+        <div class="timeline-item card-3d">
+          <h3>Full-Stack Developer, 27 Architects</h3>
+          <span>Jan 2021 – Aug 2021</span>
+          <p>Built an expense management system to streamline invoicing and tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume / Experience Section -->
+  <section id="resume" class="resume reveal glass-panel">
+    <div class="container">
+      <h2>Professional Experience</h2>
+      <!-- Download Resume Button -->
+      <div class="download-resume">
+        <a href="/files/MounikaCheera_Resume.pdf" class="btn download-btn" download>Download Resume</a>
+      </div>
+      <div class="experience">
+        <article class="job card-3d">
+          <h3>Graduate Research Assistant, UMBC</h3>
+          <span class="date">Aug 2022 – May 2024</span>
+          <ul>
+            <li>Designed and implemented a scalable web portal for assignment submissions, grading, and statistical reporting.</li>
+            <li>Integrated role-based access for instructors and TAs while optimizing database queries.</li>
+            <li>Reduced grading workload by 40% and provided actionable insights through automated reporting.</li>
+          </ul>
+          <p class="tech">Technologies: React, PostgreSQL, Express.js, Node.js</p>
+        </article>
+
+        <article class="job card-3d">
+          <h3>Programmer Analyst Trainee, Cognizant</h3>
+          <span class="date">Aug 2021 – Aug 2022</span>
+          <ul>
+            <li>Developed an automated reconciliation system using Informatica PowerCenter.</li>
+            <li>Designed ETL pipelines and implemented sophisticated matching algorithms for financial data.</li>
+          </ul>
+          <p class="tech">Technologies: Informatica PowerCenter, Oracle, SQL, PL/SQL, Python, Talend, Tableau</p>
+        </article>
+
+        <article class="job card-3d">
+          <h3>Full-Stack Developer, 27 Architects</h3>
+          <span class="date">Jan 2021 – Aug 2021</span>
+          <ul>
+            <li>Developed an expense management system for streamlined invoicing and financial tracking.</li>
+            <li>Designed a RESTful API and integrated real-time data visualizations for detailed expense insights.</li>
+          </ul>
+          <p class="tech">Technologies: React.js, Node.js, PostgreSQL, Heroku</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio / Projects Section -->
+  <section id="portfolio" class="portfolio reveal">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="project-card card-3d">
+          <img src="images/project1.jpg" alt="Assignment Portal Project">
+          <div class="project-info">
+            <h3>Assignment Portal</h3>
+            <p>A scalable portal for streamlined assignment submissions and grading processes.</p>
+            <p class="tech">React, Node.js, PostgreSQL</p>
+            <a href="#" class="btn" data-project="1">Learn More</a>
+          </div>
+        </div>
+        <div class="project-card card-3d">
+          <img src="images/project2.jpg" alt="Reconciliation System">
+          <div class="project-info">
+            <h3>Reconciliation System</h3>
+            <p>Automated financial reconciliation ensuring accuracy and compliance.</p>
+            <p class="tech">Informatica, Oracle, Python</p>
+            <a href="#" class="btn" data-project="2">Learn More</a>
+          </div>
+        </div>
+        <div class="project-card card-3d">
+          <img src="images/project3.jpg" alt="Expense Management">
+          <div class="project-info">
+            <h3>Expense Management</h3>
+            <p>System to track and analyze expenses for improved financial oversight.</p>
+            <p class="tech">React.js, Node.js, PostgreSQL</p>
+            <a href="#" class="btn" data-project="3">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills reveal glass-panel">
+    <div class="container">
+      <h2>Skills &amp; Tools</h2>
+      <div class="skills-grid">
+        <div class="skill-item card-3d">
+          <h3>Languages</h3>
+          <p>Python, SQL, PL/SQL, JavaScript, HTML5, CSS3</p>
+        </div>
+        <div class="skill-item card-3d">
+          <h3>Frameworks &amp; Tools</h3>
+          <p>React.js, Redux, Node.js, Express.js, PostgreSQL, Kubernetes</p>
+        </div>
+        <div class="skill-item card-3d">
+          <h3>Platforms</h3>
+          <p>AWS, Heroku, Git, Oracle, Informatica, Talend, Tableau</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Endorsements Section -->
+  <section id="endorsements" class="endorsements reveal glass-panel">
+    <div class="container">
+      <h2>Endorsements</h2>
+      <p class="section-desc">Feedback from My Previous Managers</p>
+      <div class="endorsement-card card-3d">
+        <p class="endorsement-text">
+          "Mounika consistently delivered high-quality work under tight deadlines. Her problem-solving skills and dedication were instrumental in the success of our project."
+        </p>
+        <p class="endorsement-author">— John Doe, Senior Manager at Cognizant</p>
+      </div>
+      <div class="endorsement-card card-3d">
+        <p class="endorsement-text">
+          "Her ability to integrate new features quickly while maintaining code quality is remarkable. She’s a true team player with a passion for continuous learning."
+        </p>
+        <p class="endorsement-author">— Jane Smith, Project Lead at 27 Architects</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact reveal">
+    <div class="container glass-panel">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:mounikacheeramail@gmail.com">mounikacheeramail@gmail.com</a></p>
+        <p>Mobile: +1 (443) 851-9255</p>
+        <p>
+          <a href="https://www.linkedin.com" target="_blank">LinkedIn</a> |
+          <a href="https://github.com" target="_blank">Github</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="reveal">
+    <div class="container footer-container">
+      <p>&copy; 2025 Mounika Cheera. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#portfolio">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back-to-Top Button -->
+  <a href="#" id="back-to-top" class="back-to-top">↑</a>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
