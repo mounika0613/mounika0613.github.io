@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mounika Cheera | Portfolio</title>
+  <meta name="description" content="Mounika Cheera - Software Engineer specializing in full-stack development, data integration, and automation solutions.">
+  <title>Mounika Cheera | Software Engineer Portfolio</title>
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <!-- Modern Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
   <!-- GSAP Library for advanced animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollToPlugin.min.js"></script>
+  <!-- Typed.js for text animation -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Particles.js for background effects -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
   <!-- Custom Cursor -->
@@ -24,8 +30,10 @@
   <div id="project-modal" class="modal">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
-      <div class="modal-body">
-        <!-- Project details will be inserted dynamically -->
+      <div class="modal-scroll-content">
+        <div class="modal-body">
+          <!-- Project details will be inserted dynamically -->
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +47,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="#hero">Home</a></li>
+          <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#portfolio">Projects</a></li>
@@ -49,9 +57,9 @@
         </ul>
       </nav>
       <div class="header-controls">
-        <button id="mode-toggle" class="mode-toggle">Toggle Mode</button>
+        <button id="mode-toggle" class="mode-toggle" aria-label="Toggle dark mode"></button>
         <div class="mobile-menu">
-          <button id="menu-toggle">☰</button>
+          <button id="menu-toggle" aria-label="Toggle menu">☰</button>
         </div>
       </div>
     </div>
@@ -59,17 +67,20 @@
 
   <!-- Hero Section with Two-Column Layout -->
   <section id="hero" class="hero reveal">
-    <div class="parallax-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+    <!-- Particles background -->
+    <div id="particles-js" class="particles-container"></div>
+    <div class="hero-content container">
       <div class="hero-text">
-        <h2>Welcome, I'm Mounika Cheera</h2>
+        <h2>Welcome, I'm <span>Mounika Cheera</span></h2>
         <p>Innovative Software Engineer delivering scalable solutions and insightful research.</p>
-        <a href="#portfolio" class="btn">View My Work</a>
+        <div class="hero-buttons">
+          <a href="#portfolio" class="btn"><span>View My Work</span></a>
+          <a href="#contact" class="btn btn-secondary"><span>Get In Touch</span></a>
+        </div>
       </div>
       <div class="hero-image">
         <!-- Replace with your actual profile image -->
-        <img src="images/profile.jpg" alt="Mounika Cheera" />
+        <img src="images/profile.jpg" alt="Mounika Cheera" loading="eager" />
       </div>
     </div>
   </section>
@@ -109,7 +120,7 @@
       <h2>Professional Experience</h2>
       <!-- Download Resume Button -->
       <div class="download-resume">
-        <a href="/files/MounikaCheera_Resume.pdf" class="btn download-btn" download>Download Resume</a>
+        <a href="/files/MounikaCheera_Resume.pdf" class="btn download-btn" download><span>Download Resume</span></a>
       </div>
       <div class="experience">
         <article class="job card-3d">
@@ -120,7 +131,12 @@
             <li>Integrated role-based access for instructors and TAs while optimizing database queries.</li>
             <li>Reduced grading workload by 40% and provided actionable insights through automated reporting.</li>
           </ul>
-          <p class="tech">Technologies: React, PostgreSQL, Express.js, Node.js</p>
+          <div class="tech">
+            <span>React</span>
+            <span>PostgreSQL</span>
+            <span>Express.js</span>
+            <span>Node.js</span>
+          </div>
         </article>
 
         <article class="job card-3d">
@@ -130,7 +146,14 @@
             <li>Developed an automated reconciliation system using Informatica PowerCenter.</li>
             <li>Designed ETL pipelines and implemented sophisticated matching algorithms for financial data.</li>
           </ul>
-          <p class="tech">Technologies: Informatica PowerCenter, Oracle, SQL, PL/SQL, Python, Talend, Tableau</p>
+          <div class="tech">
+            <span>Informatica</span>
+            <span>Oracle</span>
+            <span>SQL</span>
+            <span>Python</span>
+            <span>Talend</span>
+            <span>Tableau</span>
+          </div>
         </article>
 
         <article class="job card-3d">
@@ -140,42 +163,122 @@
             <li>Developed an expense management system for streamlined invoicing and financial tracking.</li>
             <li>Designed a RESTful API and integrated real-time data visualizations for detailed expense insights.</li>
           </ul>
-          <p class="tech">Technologies: React.js, Node.js, PostgreSQL, Heroku</p>
+          <div class="tech">
+            <span>React.js</span>
+            <span>Node.js</span>
+            <span>PostgreSQL</span>
+            <span>Heroku</span>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio / Projects Section -->
+  <!-- Portfolio / Projects Section with Advanced Layout -->
   <section id="portfolio" class="portfolio reveal">
     <div class="container">
-      <h2>Projects</h2>
+      <h2>Featured Projects</h2>
+      <p class="section-subtitle">Recent work showcasing my technical expertise and problem-solving abilities</p>
+      
       <div class="project-grid">
+        <!-- Project 1: Healthcare Fraud Detection -->
         <div class="project-card card-3d">
-          <img src="images/project1.jpg" alt="Assignment Portal Project">
+          <div class="project-img-container">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" width="100" height="100" stroke="currentColor" stroke-width="1.5" fill="none">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                <line x1="16" y1="8" x2="2" y2="22"></line>
+                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+              </svg>
+            </div>
+          </div>
           <div class="project-info">
-            <h3>Assignment Portal</h3>
-            <p>A scalable portal for streamlined assignment submissions and grading processes.</p>
-            <p class="tech">React, Node.js, PostgreSQL</p>
-            <a href="#" class="btn" data-project="1">Learn More</a>
+            <div class="project-header">
+              <h3>Healthcare Fraud Detection</h3>
+              <span class="project-date">Aug 2023 - Dec 2023</span>
+            </div>
+            <p>Machine learning-powered system to detect fraudulent healthcare claims patterns and reduce insurance fraud.</p>
+            <div class="tech">
+              <span>Python</span>
+              <span>Scikit-learn</span>
+              <span>TensorFlow</span>
+              <span>SQL</span>
+            </div>
+            <div class="btn-container">
+              <a href="#" class="btn" data-project="1"><span>View Details</span></a>
+            </div>
           </div>
         </div>
+        
+        <!-- Project 2: Human Activity Recognition -->
         <div class="project-card card-3d">
-          <img src="images/project2.jpg" alt="Reconciliation System">
+          <div class="project-img-container">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" width="100" height="100" stroke="currentColor" stroke-width="1.5" fill="none">
+                <path d="M16 18l2-2-4-4-4 4 2 2"></path>
+                <path d="M18 16l2-2-4-4-4 4 2 2"></path>
+                <path d="M20 14l2-2-4-4-4 4 2 2"></path>
+                <path d="M14 20l2-2-4-4-4 4 2 2"></path>
+                <path d="M16 16v-5a3 3 0 0 0-6 0v5"></path>
+                <path d="M5 8h2"></path>
+                <path d="M5 12h3"></path>
+                <path d="M5 16h2"></path>
+              </svg>
+            </div>
+          </div>
           <div class="project-info">
-            <h3>Reconciliation System</h3>
-            <p>Automated financial reconciliation ensuring accuracy and compliance.</p>
-            <p class="tech">Informatica, Oracle, Python</p>
-            <a href="#" class="btn" data-project="2">Learn More</a>
+            <div class="project-header">
+              <h3>Human Activity Recognition</h3>
+              <span class="project-date">Oct 2022 - Jan 2023</span>
+            </div>
+            <p>ML-based system that identifies human activities from wearable sensor data for health monitoring applications.</p>
+            <div class="tech">
+              <span>Python</span>
+              <span>Scikit-learn</span>
+              <span>Signal Processing</span>
+              <span>Classification</span>
+            </div>
+            <div class="btn-container">
+              <a href="#" class="btn" data-project="2"><span>View Details</span></a>
+            </div>
           </div>
         </div>
+        
+        <!-- Project 3: Sign Language to Speech Translation -->
         <div class="project-card card-3d">
-          <img src="images/project3.jpg" alt="Expense Management">
+          <div class="project-img-container">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" width="100" height="100" stroke="currentColor" stroke-width="1.5" fill="none">
+                <path d="M12 18h.01"></path>
+                <path d="M7 8h.01"></path>
+                <path d="M3 8h.01"></path>
+                <path d="M17 8h.01"></path>
+                <path d="M21 8h.01"></path>
+                <path d="M19 4h.01"></path>
+                <path d="M5 4h.01"></path>
+                <path d="M9 4h.01"></path>
+                <path d="M15 4h.01"></path>
+                <path d="M12 8V4"></path>
+                <path d="M12 12v-4"></path>
+                <path d="M6 12v4a6 6 0 0 0 12 0v-4"></path>
+              </svg>
+            </div>
+          </div>
           <div class="project-info">
-            <h3>Expense Management</h3>
-            <p>System to track and analyze expenses for improved financial oversight.</p>
-            <p class="tech">React.js, Node.js, PostgreSQL</p>
-            <a href="#" class="btn" data-project="3">Learn More</a>
+            <div class="project-header">
+              <h3>Sign Language Translator</h3>
+              <span class="project-date">Mar 2022 - May 2022</span>
+            </div>
+            <p>Assistive technology that translates American Sign Language gestures into speech in real-time using computer vision.</p>
+            <div class="tech">
+              <span>TensorFlow</span>
+              <span>Keras</span>
+              <span>OpenCV</span>
+              <span>Speech Synthesis</span>
+            </div>
+            <div class="btn-container">
+              <a href="#" class="btn" data-project="3"><span>View Details</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -189,15 +292,75 @@
       <div class="skills-grid">
         <div class="skill-item card-3d">
           <h3>Languages</h3>
-          <p>Python, SQL, PL/SQL, JavaScript, HTML5, CSS3</p>
+          <div class="skill-progress">
+            <div class="skill-label">Python</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="90"></div>
+            </div>
+            
+            <div class="skill-label">JavaScript</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="85"></div>
+            </div>
+            
+            <div class="skill-label">SQL</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="95"></div>
+            </div>
+            
+            <div class="skill-label">HTML/CSS</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="80"></div>
+            </div>
+          </div>
         </div>
         <div class="skill-item card-3d">
           <h3>Frameworks &amp; Tools</h3>
-          <p>React.js, Redux, Node.js, Express.js, PostgreSQL, Kubernetes</p>
+          <div class="skill-progress">
+            <div class="skill-label">React.js</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="88"></div>
+            </div>
+            
+            <div class="skill-label">Node.js</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="85"></div>
+            </div>
+            
+            <div class="skill-label">Express.js</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="82"></div>
+            </div>
+            
+            <div class="skill-label">PostgreSQL</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="90"></div>
+            </div>
+          </div>
         </div>
         <div class="skill-item card-3d">
           <h3>Platforms</h3>
-          <p>AWS, Heroku, Git, Oracle, Informatica, Talend, Tableau</p>
+          <div class="skill-progress">
+            <div class="skill-label">AWS</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="75"></div>
+            </div>
+            
+            <div class="skill-label">Heroku</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="85"></div>
+            </div>
+            
+            <div class="skill-label">Git</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="90"></div>
+            </div>
+            
+            <div class="skill-label">Informatica</div>
+            <div class="skill-bar">
+              <div class="skill-fill" data-percentage="80"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -209,16 +372,30 @@
       <h2>Endorsements</h2>
       <p class="section-desc">Feedback from My Previous Managers</p>
       <div class="endorsement-card card-3d">
+        <div class="quote-mark">"</div>
         <p class="endorsement-text">
-          "Mounika consistently delivered high-quality work under tight deadlines. Her problem-solving skills and dedication were instrumental in the success of our project."
+          Mounika consistently delivered high-quality work under tight deadlines. Her problem-solving skills and dedication were instrumental in the success of our project.
         </p>
-        <p class="endorsement-author">— John Doe, Senior Manager at Cognizant</p>
+        <div class="endorsement-author">
+          <img src="images/testimonial1.jpg" alt="John Doe" class="author-img" loading="lazy">
+          <div>
+            <strong>John Doe</strong>
+            <span>Senior Manager at Cognizant</span>
+          </div>
+        </div>
       </div>
       <div class="endorsement-card card-3d">
+        <div class="quote-mark">"</div>
         <p class="endorsement-text">
-          "Her ability to integrate new features quickly while maintaining code quality is remarkable. She’s a true team player with a passion for continuous learning."
+          Her ability to integrate new features quickly while maintaining code quality is remarkable. She's a true team player with a passion for continuous learning.
         </p>
-        <p class="endorsement-author">— Jane Smith, Project Lead at 27 Architects</p>
+        <div class="endorsement-author">
+          <img src="images/testimonial2.jpg" alt="Jane Smith" class="author-img" loading="lazy">
+          <div>
+            <strong>Jane Smith</strong>
+            <span>Project Lead at 27 Architects</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -237,15 +414,35 @@
         <div class="form-group">
           <textarea name="message" placeholder="Your Message" required></textarea>
         </div>
-        <button type="submit" class="btn">Send Message</button>
+        <button type="submit" class="btn"><span>Send Message</span></button>
       </form>
       <div class="contact-info">
-        <p>Email: <a href="mailto:mounikacheeramail@gmail.com">mounikacheeramail@gmail.com</a></p>
-        <p>Mobile: +1 (443) 851-9255</p>
-        <p>
-          <a href="https://www.linkedin.com/in/mounikacheera/" target="_blank">LinkedIn</a> |
-          <a href="https://github.com" target="_blank">Github</a>
-        </p>
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="contact-icon">📧</div>
+            <div class="contact-detail">
+              <h4>Email</h4>
+              <a href="mailto:mounikacheeramail@gmail.com">mounikacheeramail@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-icon">📱</div>
+            <div class="contact-detail">
+              <h4>Phone</h4>
+              <p>+1 (443) 851-9255</p>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-icon">🔗</div>
+            <div class="contact-detail">
+              <h4>Connect</h4>
+              <div class="social-links">
+                <a href="https://www.linkedin.com/in/mounikacheera/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com" target="_blank" rel="noopener">Github</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -253,18 +450,35 @@
   <!-- Footer -->
   <footer class="reveal">
     <div class="container footer-container">
-      <p>&copy; 2025 Mounika Cheera. All rights reserved.</p>
+      <div class="footer-logo">
+        <h3>Mounika Cheera</h3>
+        <p>Building digital solutions that matter.</p>
+      </div>
       <div class="footer-links">
+        <h4>Navigation</h4>
         <a href="#hero">Home</a>
         <a href="#about">About</a>
         <a href="#portfolio">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:mounikacheeramail@gmail.com">mounikacheeramail@gmail.com</a>
+        <p>+1 (443) 851-9255</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mounikacheera/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://github.com" target="_blank" rel="noopener" aria-label="Github">gh</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Mounika Cheera. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- Back-to-Top Button -->
-  <a href="#" id="back-to-top" class="back-to-top">↑</a>
+  <a href="#" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</a>
 
   <script src="js/script.js"></script>
 </body>
