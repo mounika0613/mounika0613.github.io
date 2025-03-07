@@ -588,78 +588,133 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Enhanced form submission with animation
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', e => {
-      e.preventDefault();
-      
-      // Validate form fields
-      const formFields = contactForm.querySelectorAll('input, textarea');
-      let isValid = true;
-      
-      formFields.forEach(field => {
-        if (!field.value.trim()) {
-          isValid = false;
-          // Shake animation for empty fields
-          gsap.to(field, {
-            x: [-10, 10, -10, 10, 0],
-            duration: 0.5,
-            ease: 'power3.out'
-          });
-        }
-      });
-      
-      if (!isValid) return;
-      
-      // Success animation
-      gsap.to(formFields, {
-        opacity: 0.5,
-        pointerEvents: 'none',
-        duration: 0.5
-      });
-      
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      
-      // Change button text with animation
-      const originalText = submitButton.innerHTML;
-      gsap.to(submitButton, {
-        width: submitButton.offsetWidth,
-        duration: 0.3,
-        onComplete: () => {
-          submitButton.innerHTML = '<span>Sending...</span>';
-          
-          // Simulate form sending
-          setTimeout(() => {
-            // Success animation
-            gsap.to(contactForm, {
-              height: contactForm.offsetHeight,
-              opacity: 0,
-              y: -20,
-              duration: 0.5,
-              onComplete: () => {
-                // Create success message
-                const successMessage = document.createElement('div');
-                successMessage.classList.add('form-success');
-                successMessage.innerHTML = '<span>Thank you!</span> Your message has been sent successfully. I\'ll get back to you soon.';
-                
-                // Insert after form
-                contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
-                
-                // Animate success message
-                gsap.fromTo(successMessage, 
-                  { opacity: 0, y: -20 }, 
-                  { opacity: 1, y: 0, duration: 0.5 }
-                );
-                
-                // Hide form
-                contactForm.style.display = 'none';
-              }
-            });
-          }, 1500);
-        }
-      });
+// Enhanced form submission with FormSubmit
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    // Validate form fields
+    const formFields = contactForm.querySelectorAll('input:not([type="hidden"]), textarea');
+    let isValid = true;
+    
+    formFields.forEach(field => {
+      if (!field.value.trim()) {
+        isValid = false;
+        // Shake animation for empty fields
+        gsap.to(field, {
+          x: [-10, 10, -10, 10, 0],
+          duration: 0.5,
+          ease: 'power3.out'
+        });
+      }
     });
-  }
+    
+    if (!isValid) return;
+    
+    // Collect form data
+    const formData = new FormData(contactForm);
+    
+    // Get form field values for our own reference
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+    
+    // Change button appearance
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<span>Sending...</span>';
+    submitButton.disabled = true;
+    
+    // Visual feedback (disable fields while sending)
+    formFields.forEach(field => {
+      field.disabled = true;
+      gsap.to(field, { opacity: 0.7, duration: 0.3 });
+    });
+    
+    // SEND THE FORM DATA TO FORMSUBMIT
+    fetch('https://formsubmit.co/mounikacheeramail@gmail.com', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Success animation
+      gsap.to(contactForm, {
+        height: contactForm.offsetHeight,
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        onComplete: () => {
+          // Create success message
+          const successMessage = document.createElement('div');
+          successMessage.classList.add('form-success');
+          successMessage.innerHTML = '<span>Thank you!</span> Your message has been sent successfully. I\'ll get back to you soon.';
+          
+          // Insert after form
+          contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
+          
+          // Animate success message
+          gsap.fromTo(successMessage, 
+            { opacity: 0, y: -20 }, 
+            { opacity: 1, y: 0, duration: 0.5 }
+          );
+          
+          // Hide form
+          contactForm.style.display = 'none';
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      
+      // Reset button
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+      
+      // Re-enable fields
+      formFields.forEach(field => {
+        field.disabled = false;
+        gsap.to(field, { opacity: 1, duration: 0.3 });
+      });
+      
+      // Show error message
+      const errorMessage = document.createElement('div');
+      errorMessage.classList.add('form-error');
+      errorMessage.textContent = 'Sorry, there was an error sending your message. Please try again.';
+      
+      // Add to the DOM
+      contactForm.prepend(errorMessage);
+      
+      // Scroll to error
+      gsap.to(window, {
+        duration: 0.5,
+        scrollTo: { y: errorMessage, offsetY: 100 }
+      });
+      
+      // Remove error after 5 seconds
+      setTimeout(() => {
+        gsap.to(errorMessage, {
+          opacity: 0, 
+          height: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          marginBottom: 0,
+          duration: 0.5,
+          onComplete: () => errorMessage.remove()
+        });
+      }, 5000);
+    });
+  });
+}
 
   // Modal for Project Details
   const modal = document.getElementById('project-modal');
