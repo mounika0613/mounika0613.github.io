@@ -414,6 +414,11 @@
         <div class="form-group">
           <textarea name="message" placeholder="Your Message" required></textarea>
         </div>
+        <!-- Hidden fields for FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New contact from Portfolio Website">
+        <input type="hidden" name="_captcha" value="false">
+        <!-- This allows us to use AJAX and avoid page redirects -->
+        <input type="hidden" name="_next" value="https://yourdomain.com/thanks">
         <button type="submit" class="btn"><span>Send Message</span></button>
       </form>
       <div class="contact-info">
