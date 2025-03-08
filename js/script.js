@@ -587,7 +587,6 @@ document.addEventListener('DOMContentLoaded', () => {
     element.classList.add('gradient-border');
   });
   
-  // Enhanced form submission with animation
 // Enhanced form submission with FormSubmit
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
@@ -612,14 +611,6 @@ if (contactForm) {
     
     if (!isValid) return;
     
-    // Collect form data
-    const formData = new FormData(contactForm);
-    
-    // Get form field values for our own reference
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    
     // Change button appearance
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalText = submitButton.innerHTML;
@@ -632,21 +623,19 @@ if (contactForm) {
       gsap.to(field, { opacity: 0.7, duration: 0.3 });
     });
     
-    // SEND THE FORM DATA TO FORMSUBMIT
-    fetch('https://formsubmit.co/mounikacheeramail@gmail.com', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
+    // Create a hidden iframe to handle the form submission
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden-form-iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    
+    // Configure the form for iframe submission
+    contactForm.target = 'hidden-form-iframe';
+    contactForm.action = 'https://formsubmit.co/YOUR_EMAIL_HERE'; // REPLACE WITH YOUR EMAIL
+    contactForm.method = 'POST';
+    
+    // Handle success after a short delay (FormSubmit submission)
+    setTimeout(() => {
       // Success animation
       gsap.to(contactForm, {
         height: contactForm.offsetHeight,
@@ -670,52 +659,19 @@ if (contactForm) {
           
           // Hide form
           contactForm.style.display = 'none';
+          
+          // Remove iframe
+          setTimeout(() => {
+            iframe.remove();
+          }, 1000);
         }
       });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      
-      // Reset button
-      submitButton.innerHTML = originalText;
-      submitButton.disabled = false;
-      
-      // Re-enable fields
-      formFields.forEach(field => {
-        field.disabled = false;
-        gsap.to(field, { opacity: 1, duration: 0.3 });
-      });
-      
-      // Show error message
-      const errorMessage = document.createElement('div');
-      errorMessage.classList.add('form-error');
-      errorMessage.textContent = 'Sorry, there was an error sending your message. Please try again.';
-      
-      // Add to the DOM
-      contactForm.prepend(errorMessage);
-      
-      // Scroll to error
-      gsap.to(window, {
-        duration: 0.5,
-        scrollTo: { y: errorMessage, offsetY: 100 }
-      });
-      
-      // Remove error after 5 seconds
-      setTimeout(() => {
-        gsap.to(errorMessage, {
-          opacity: 0, 
-          height: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
-          marginBottom: 0,
-          duration: 0.5,
-          onComplete: () => errorMessage.remove()
-        });
-      }, 5000);
-    });
+    }, 1500); // Wait for form submission to complete
+    
+    // Submit the form to the iframe
+    contactForm.submit();
   });
 }
-
   // Modal for Project Details
   const modal = document.getElementById('project-modal');
   const modalBody = document.querySelector('.modal-body');
