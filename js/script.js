@@ -631,7 +631,7 @@ if (contactForm) {
     
     // Configure the form for iframe submission
     contactForm.target = 'hidden-form-iframe';
-    contactForm.action = 'https://formsubmit.co/YOUR_EMAIL_HERE'; // REPLACE WITH YOUR EMAIL
+    contactForm.action = 'https://formsubmit.co/mounikacheeramail@gmail.com'; // REPLACE WITH YOUR EMAIL
     contactForm.method = 'POST';
     
     // Handle success after a short delay (FormSubmit submission)
